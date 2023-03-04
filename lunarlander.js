@@ -15,22 +15,28 @@ function setup() {
 function draw() {
   keyPressed ();
   space();
+  start ();
   moon();
-  fuelFunc ();
-  
-}
-
-function keyPressed (){
-  if (keyCode == 'ENTER') {
-    start ();
-  }
+  landing(); 
 }
 
 function start(){
   fill(255, 255, 255);
   textAlign(CENTER);
+  push();
   textSize(60);
-  text("Lunar Lander", x, y + 20);  
+  text("Lunar Lander", x, y + 50);
+  pop();
+  textSize(30);
+  text( "Click SPACE to play", x, y + 150);
+}
+
+function keyPressed (){
+  if (key == ' ') {
+    ship ();
+    fuelFunc ();
+    
+  }
 }
 
 function space() {
@@ -60,7 +66,7 @@ function moon() {
 }
 
 function landing() {
-  if (key == ' ') {
+  if (keyIsDown(UP_ARROW)) {
     fuel -= 2;
     p = 2;
     ship.rect.y -= v;
@@ -75,6 +81,9 @@ function fuelFunc () {
   text ("Fuel: " + fuel , x - 280, y - 50);
 }
 
+function obstacles () {
+  
+}
 
 
 
