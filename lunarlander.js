@@ -17,7 +17,7 @@ function draw() {
   space();
   start ();
   moon();
-  landing(); 
+   
 }
 
 function start(){
@@ -35,7 +35,7 @@ function keyPressed (){
   if (key == ' ') {
     ship ();
     fuelFunc ();
-    
+    landing();
   }
 }
 
@@ -65,6 +65,7 @@ function moon() {
   rect (x, y, 40); 
 }
 
+//ref: https://editor.p5js.org/skallywag/sketches/ByydCKx3m
 function landing() {
   if (keyIsDown(UP_ARROW)) {
     fuel -= 2;
@@ -74,16 +75,42 @@ function landing() {
   else {
     p = 5;
   }
+  if (keyIsDown(LEFT_ARROW)) {
+    fuel -= 1;
+    p = 2;
+    ship.rect.x -= v;
+
+  }
+  if (keyIsDown(RIGHT_ARROW)) {
+    fuel -= 1;
+    p = 2;
+    ship.rect.x += v;
+  }
 }
 
 function fuelFunc () {
-  textSize (30);
+  textSize (20);
   text ("Fuel: " + fuel , x - 280, y - 50);
+  if (fuel > 0) {
+   landing ();
+  }
 }
 
 function obstacles () {
   
 }
+ function result () {
+  if (fuel == 0) {
+    gravity = 0;
+    v = 0;
+    fuel = 0;
+    
+    push();
+    textSize (60);
+    text ("YOU LOST", x, y + 200);
+  }
+}
+
 
 
 
