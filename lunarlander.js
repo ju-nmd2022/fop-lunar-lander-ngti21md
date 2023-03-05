@@ -156,7 +156,7 @@ function start(){
 }
 
 function restart(){
-  if ((won == 1 || lost == 1) && gameActive == 1) {
+  if (won == 1 || lost == 1) {
     keyPressedRestart ();
     push ();
     fill (255, 255, 255);
@@ -168,7 +168,17 @@ function restart(){
 }
 function keyPressedRestart (){
     if (keyCode == '13') {  
-      gameActive = 0;
+    x = 300;
+    y = 100;
+    gravity = 10;
+    yship = 50;
+    xship = 300;
+    v = 9; //velocity
+    // velx = 5, 
+    fuel = 100;  
+    gameActive = 0;
+    won = 0;
+    lost = 0;
     }
   }
 }
