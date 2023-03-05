@@ -2,9 +2,11 @@ let x = 300,
     y = 100,
     gravity = 10;
     yship = 50;
-let v = 9, //velocity 
+    xship = 300;
+let v = 9, //velocity
+    velx = 5, 
     fuel = 100,  
-    gameActive = true;
+    gameActive = 0;
      
 
 function setup() {
@@ -18,14 +20,15 @@ function start(){
   textSize(60);
   text("THE GAME", x, y + 50);
   pop();
-  textSize(30);
-  text( "Click SPACE to play", x, y + 150);
+  textSize(30); 
+  text( "Click SPACE to play", x, y + 150); 
 }
 
 function keyPressed (){ 
-  if (key == ' ') {
-    gameActive = true;
-  }
+  if (gameActive === 0) {
+    keyCode = ' ';
+    gameActive = 1;  
+  } 
 }
 
 function landscape (){
@@ -40,20 +43,19 @@ function landscape (){
 
   // Green Ground
   noStroke();
-  fill(0,100,0);// rgb
+  fill(0,100,0);
   rect(0,400,width,200);
   
   // tree 1
-  fill(67, 51, 8); // tree brown
-  rect(95,400,10,30); // trunk
+  fill(67, 51, 8); 
+  rect(95,400,10,30); 
   fill(23, 69, 29);
-  ellipse(90,400,30,30);// tree top
+  ellipse(90,400,30,30);
   ellipse(100,390,30,40);
   ellipse(110,405,40,30);
 
   // tree 2
   push();
-    // translate(-40,-40);
     scale(1.75);
     fill(67, 51, 8); 
     rect(200,215,10,40); 
@@ -75,7 +77,7 @@ function landscape (){
 
  function ship() {
   // translate (x, y);
-  rect (x, yship , 40);
+  rect (xship, yship , 40);
   yship = yship + gravity;   
 } 
 
@@ -83,6 +85,7 @@ function draw() {
   // space();
   // moon();
   clear();
+  //   
   landscape ();
   examine ();
 }
@@ -90,32 +93,29 @@ function draw() {
 //ref: https://editor.p5js.org/skallywag/sketches/ByydCKx3m
 function landing() {
   if (keyIsDown(UP_ARROW)) {
-    yship -= v;  
-    fuel -= 2;
-//     p = 2;
-//     ship.rect.y -= v;
+    yship -= v;   
+    fuel -= 1; 
+    velx = 1;
   }
-//   else {
-//     p = 5;
-//   }
+  else {
+    velx = 5;
+  }
   if (keyIsDown(LEFT_ARROW)) {
-    x -= v; 
+    xship -= v; 
     fuel -= 1;
-//     p = 2;
-//     ship.rect.x -= v;
-
+    velx = 1;
   }
   if (keyIsDown(RIGHT_ARROW)) {
-    x += v;
+    xship += v;
     fuel -= 1;
-//     p = 2;
-//     ship.rect.x += v;
+    velx = 1;
   }
 }
 
  function result () {
-  if (fuel <= 0 && yship <= 415) {  
-    yship = 415;     
+  if (fuel <= 0 && velx > 1) {   
+    yship = 415; 
+    gravity = 0;     
     v = 0; 
     fuel = 0;
     push();
@@ -123,46 +123,38 @@ function landing() {
     textSize (60);
     fill (255, 255, 255);
     text ('YOU LOST!', 300, 200);   
-    pop(); 
+    pop();  
   }
-  else if (fuel >= 0 && yship >= 415) { 
-    yship = 415;    
+  if (fuel >= 0 && yship >= 415 && velx == 1 &&
+      xship > 0 && xship < 73 && 
+      xship > 130 && xship < 320 &&
+      xship > 395 && xship < 560) {        
+    yship = 415; 
+    gravity = 0;
+    v = 0;   
     push();
-    textAlign (CENTER);  
+    textAlign (CENTER);     
     textSize (60);
     fill (255, 255, 255);
-    text ('YOU LOST!', 300, 200);   
-    pop();
+    text ('YOU WON!', 300, 200);     
+    pop();  
   }
+
 }   
-    
-//     push();
-//     textSize (60);
-//     text ("YOU LOST", x, y + 200);
-//   }
-// }
-// function velocity (y){
-//   v = (y-y/gravity)*10;  
-//   return v;  
-// }
 
 function engine (){
   textSize(24);
   fill (255, 255, 255);
   text("fuel: " + fuel, 10, 30);
-  if (fuel > 0){
-
-  } 
 }
 
 function examine (){
-  keyPressed();
-  ship();
+  
+if (gameActive) {
   engine ();
+  ship();
   landing(); 
   result ();
-// if (gameActive) {
-//   y += gravity;
-// }
-// else start();
+}
+else { start(); }
 }
