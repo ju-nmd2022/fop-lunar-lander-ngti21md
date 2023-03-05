@@ -1,9 +1,8 @@
 let x = 300,
-    my = 100,
+    y = 100,
     gravity = 1;
-let p , //position
-    v, //velocity
-    isGameActive = true;
+let v = 10, //velocity
+    gameActive = true;
      
 
 function setup() {
@@ -21,30 +20,11 @@ function start(){
   text( "Click SPACE to play", x, y + 150);
 }
 
-// function keyPressed (){
-//   if (key == ' ') {
-//     ship ();
-//     fuelFunc ();
-//     landing();
-//   }
-// }
-
-// function space() {  
-//     // for(let i = 0; i < 500; i++) {
-//     //     let randomSize = random(0.5, 3);
-//     //     let randomX = random(width);
-//     //     let randomY = random(height);
-//     //     noStroke();
-//     //     let space = map (randomSize, 0.5, 3, 50, 200);
-//     //     fill (255,255,255,space);
-//     //     ellipse (randomX, randomY, randomSize, randomSize);
-//         // noLoop();
-//     // }
-// }
-// function moon() {
-//   fill (160, 160, 160);
-//   rect (0, height * 0.75, width, height * 0.25);
-// } 
+function keyPressed (){
+  if (key == ' ') {
+    gameActive = true;
+  }
+}
 
 function landscape (){
   background(159, 189, 237);// rgb  0-255
@@ -89,13 +69,12 @@ function landscape (){
     ellipse(590,330,50,40);
     ellipse(600,295,60,60);
   pop();
-}
+} 
 
  function ship() {
   // translate (x, y);
-  rect (x, my - 100, 40);
-
-  my += 15;   
+  rect (x, y - 100, 40);
+  y += gravity;   
 }
 
 function draw() {
@@ -103,32 +82,32 @@ function draw() {
   // moon();
   clear();
   landscape ();
-
-   
+  examine ();
 }
 
 //ref: https://editor.p5js.org/skallywag/sketches/ByydCKx3m
-// function landing() {
-//   if (keyIsDown(UP_ARROW)) {
+function landing() {
+  if (keyIsDown(UP_ARROW)) {
+    y -= v; 
 //     fuel -= 2;
 //     p = 2;
 //     ship.rect.y -= v;
-//   }
+  }
 //   else {
 //     p = 5;
 //   }
-//   if (keyIsDown(LEFT_ARROW)) {
+  if (keyIsDown(LEFT_ARROW)) {
 //     fuel -= 1;
 //     p = 2;
 //     ship.rect.x -= v;
 
-//   }
-//   if (keyIsDown(RIGHT_ARROW)) {
+  }
+  if (keyIsDown(RIGHT_ARROW)) {
 //     fuel -= 1;
 //     p = 2;
 //     ship.rect.x += v;
-//   }
-// }
+  }
+}
 
 //  function result () {
 //   if (fuel == 0) {
@@ -141,4 +120,15 @@ function draw() {
 //     text ("YOU LOST", x, y + 200);
 //   }
 // }
+// function velocity (y){
+//   v = (y-y/gravity)*10;  
+//   return v;  
+// }
 
+function examine (){
+  ship();
+  landing();
+if (gameActive) {
+  y += gravity;
+}
+}
