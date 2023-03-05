@@ -1,23 +1,13 @@
 let x = 300,
-    y = 100,
+    my = 100,
     gravity = 1;
-let p = 5, //position
-    v, //speed
-    h = height,
-    g,
-    fuel = 60,
-    engine;      
+let p , //position
+    v, //velocity
+    isGameActive = true;
+     
 
 function setup() {
-  createCanvas (600, 700);
-  noLoop();
-}
-function draw() {
-  keyPressed ();
-  space();
-  start ();
-  moon();
-   
+  createCanvas (600, 500);
 }
 
 function start(){
@@ -31,95 +21,115 @@ function start(){
   text( "Click SPACE to play", x, y + 150);
 }
 
-function keyPressed (){
-  if (key == ' ') {
-    ship ();
-    fuelFunc ();
-    landing();
+// function keyPressed (){
+//   if (key == ' ') {
+//     ship ();
+//     fuelFunc ();
+//     landing();
+//   }
+// }
+
+// function space() {  
+//     // for(let i = 0; i < 500; i++) {
+//     //     let randomSize = random(0.5, 3);
+//     //     let randomX = random(width);
+//     //     let randomY = random(height);
+//     //     noStroke();
+//     //     let space = map (randomSize, 0.5, 3, 50, 200);
+//     //     fill (255,255,255,space);
+//     //     ellipse (randomX, randomY, randomSize, randomSize);
+//         // noLoop();
+//     // }
+// }
+// function moon() {
+//   fill (160, 160, 160);
+//   rect (0, height * 0.75, width, height * 0.25);
+// } 
+
+function landscape (){
+  background(159, 189, 237);// rgb  0-255
+  
+  // pretty sky
+  for(var i=0; i<=400; i+=5){
+    strokeWeight(5*2);
+    stroke(255*2-i*2,128*2-i*2,64*2);
+    line(0,400-i*2,width,400-i*2); // x,y,x,y
   }
+
+  // Green Ground
+  noStroke();
+  fill(0,100,0);// rgb
+  rect(0,400,width,200);
+  
+  // tree 1
+  fill(67, 51, 8); // tree brown
+  rect(320,194,10,20); // trunk
+  fill(23, 69, 29);
+  ellipse(326,172,20,20);// tree top
+  ellipse(324,192,30,20);
+  ellipse(330,182,20,20);
+
+  // tree 2
+  push();
+    translate(-40,-40);
+    scale(1.5);
+    fill(67, 51, 8); // tree brown
+    rect(320,194,10,20); // trunk
+    fill(23, 69, 29);
+    ellipse(326,192,20,20);// tree top
+    ellipse(324,172,30,20);
+    ellipse(330,182,20,20);
+  pop();
 }
 
-function space() {
-    for(let i = 0; i < 500; i++) {
-        let randomSize = random(0.5, 3);
-        let randomX = random(width);
-        let randomY = random(height);
-        noStroke();
-        let space = map (randomSize, 0.5, 3, 50, 200);
-        fill (255,255,255,space);
-        ellipse (randomX, randomY, randomSize, randomSize);
-    }
-}
-function moon() {
-  fill (160, 160, 160);
-  rect (0, h * 0.75, width, h * 0.25);
-
-  push ();
-  translate (50, 500);
-  fill (160, 160, 160);
-  ellipse (0, 0, 80, 20);
-  pop ();
-} 
  function ship() {
   // translate (x, y);
-  rect (x, y, 40); 
+  rect (x, my - 100, 40);
+
+  my += 15;   
+}
+
+function draw() {
+  // space();
+  // moon();
+  clear();
+  landscape ();
+
+   
 }
 
 //ref: https://editor.p5js.org/skallywag/sketches/ByydCKx3m
-function landing() {
-  if (keyIsDown(UP_ARROW)) {
-    fuel -= 2;
-    p = 2;
-    ship.rect.y -= v;
-  }
-  else {
-    p = 5;
-  }
-  if (keyIsDown(LEFT_ARROW)) {
-    fuel -= 1;
-    p = 2;
-    ship.rect.x -= v;
+// function landing() {
+//   if (keyIsDown(UP_ARROW)) {
+//     fuel -= 2;
+//     p = 2;
+//     ship.rect.y -= v;
+//   }
+//   else {
+//     p = 5;
+//   }
+//   if (keyIsDown(LEFT_ARROW)) {
+//     fuel -= 1;
+//     p = 2;
+//     ship.rect.x -= v;
 
-  }
-  if (keyIsDown(RIGHT_ARROW)) {
-    fuel -= 1;
-    p = 2;
-    ship.rect.x += v;
-  }
-}
+//   }
+//   if (keyIsDown(RIGHT_ARROW)) {
+//     fuel -= 1;
+//     p = 2;
+//     ship.rect.x += v;
+//   }
+// }
 
-function fuelFunc () {
-  textSize (20);
-  text ("Fuel: " + fuel , x - 280, y - 50);
-  if (fuel > 0) {
-   landing ();
-  }
-}
-
-function obstacles () {
-  
-}
- function result () {
-  if (fuel == 0) {
-    gravity = 0;
-    v = 0;
-    fuel = 0;
+//  function result () {
+//   if (fuel == 0) {
+//     gravity = 0;
+//     v = 0;
+//     fuel = 0;
     
-    push();
-    textSize (60);
-    text ("YOU LOST", x, y + 200);
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
+//     push();
+//     textSize (60);
+//     text ("YOU LOST", x, y + 200);
+//   }
+// }
 
