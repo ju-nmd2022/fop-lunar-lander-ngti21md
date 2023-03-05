@@ -15,56 +15,22 @@ function setup() {
   createCanvas (600, 500);
 } 
 
-function start(){
-  fill(255, 255, 255);
-  textAlign(CENTER);
-  push();
-  textSize(60);
-  text("THE GAME", x, y + 50);
-  pop();
-  textSize(30); 
-  text( "Press SPACE to play", x, y + 150);  
-}
-
-function restart(){
-  if (won == 1 || lost == 1) {
-
-    push ();
-    fill (255, 255, 255);
-    textAlign (CENTER);
-    textSize (30);
-    text ('Press SPACE to restart');
-    pop ();
-
-    if (keyCode == ' ') {  
-      start ();
-    }
-  }
-}
-
-function keyPressed (){ 
-  if (gameActive === 0) {
-    keyCode = ' ';
-    gameActive = 1;  
-  } 
-}
-
 function landscape (){
   background(159, 189, 237);
   
-  // pretty sky
+  // sky
   for(var i=0; i<=400; i+=5){
     strokeWeight(50);
     stroke(255*2-i*2,128*2-i*2,64*2);
     line(0,400-i*2,width,400-i*2); 
   }
 
-  // Green Ground
+  // ground
   noStroke();
   fill(0,100,0);
   rect(0,400,width,200);
   
-  // tree 1
+  // tree1
   fill(67, 51, 8); 
   rect(95,400,10,30); 
   fill(23, 69, 29);
@@ -72,7 +38,7 @@ function landscape (){
   ellipse(100,390,30,40);
   ellipse(110,405,40,30);
 
-  // tree 2
+  // tree2
   push();
     scale(1.75);
     fill(67, 51, 8); 
@@ -116,7 +82,7 @@ function draw() {
   clear();   
   landscape ();
   examine ();
-  restart ();
+  // restart ();
 }
 
 //ref: https://editor.p5js.org/skallywag/sketches/ByydCKx3m
@@ -178,13 +144,51 @@ function engine (){
   text("fuel: " + fuel, 10, 30);
 }
 
+function start(){
+  fill(255, 255, 255);
+  textAlign(CENTER);
+  push();
+  textSize(60);
+  text("THE GAME", x, y + 50);
+  pop();
+  textSize(30); 
+  text( "Press SPACE to play", x, y + 150);  
+}
+
+function restart(){
+  if ((won == 1 || lost == 1) && gameActive == 1) {
+    keyPressedRestart ();
+    push ();
+    fill (255, 255, 255);
+    textAlign (CENTER);
+    textSize (30);
+    text ("Press ENTER to restart", x, y + 160);  
+    pop ();
+    // gameActive = 0;
+}
+function keyPressedRestart (){
+    if (keyCode == '13') {  
+      gameActive = 0;
+    }
+  }
+}
+
+function keyPressed (){ 
+  if (gameActive === 0) {
+    keyCode = ' ';
+    gameActive = 1;  
+  } 
+}
+
 function examine (){
 if (gameActive == 1) {
   engine ();
   ship();
   landing(); 
   result ();
-  // restart ();
+// if ( won == 1 || lost == 1) {
+  restart ();
+// }
 }
 else {start();}
 }
