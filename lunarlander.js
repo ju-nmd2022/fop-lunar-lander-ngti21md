@@ -63,22 +63,31 @@ function landscape (){
   
   // tree 1
   fill(67, 51, 8); // tree brown
-  rect(320,194,10,20); // trunk
+  rect(95,400,10,30); // trunk
   fill(23, 69, 29);
-  ellipse(326,172,20,20);// tree top
-  ellipse(324,192,30,20);
-  ellipse(330,182,20,20);
+  ellipse(90,400,30,30);// tree top
+  ellipse(100,390,30,40);
+  ellipse(110,405,40,30);
 
   // tree 2
   push();
-    translate(-40,-40);
-    scale(1.5);
-    fill(67, 51, 8); // tree brown
-    rect(320,194,10,20); // trunk
+    // translate(-40,-40);
+    scale(1.75);
+    fill(67, 51, 8); 
+    rect(200,215,10,40); 
     fill(23, 69, 29);
-    ellipse(326,192,20,20);// tree top
-    ellipse(324,172,30,20);
-    ellipse(330,182,20,20);
+    ellipse(200,210,30,30);
+    ellipse(210,200,30,30);
+    ellipse(195,195,20,20);
+  pop();
+
+  // tree3
+  push();
+    fill(67, 51, 8); 
+    rect(590,340,10,80); 
+    fill(23, 69, 29);
+    ellipse(590,330,50,40);
+    ellipse(600,295,60,60);
   pop();
 }
 
