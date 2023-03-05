@@ -77,8 +77,22 @@ function landscape (){
 
  function ship() {
   // translate (x, y);
-  rect (xship, yship , 40);
-  yship = yship + gravity;   
+  // rect (xship, yship , 40);
+push ();
+fill (255, 0, 0);
+triangle (xship, yship - 10, xship - 50, yship + 30, xship + 50, yship + 30);
+pop ();
+
+push ();
+fill (126, 126, 126);
+ellipse (xship, yship, 60, 70);
+pop ();
+
+push ();
+fill (255, 255, 255);
+ellipse (xship, yship - 10 , 30);
+pop ();
+yship = yship + gravity;   
 } 
 
 function draw() {
