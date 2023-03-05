@@ -21,7 +21,7 @@ function start(){
   text("THE GAME", x, y + 50);
   pop();
   textSize(30); 
-  text( "Press SPACE to play", x, y + 150); 
+  text( "Press SPACE to play", x, y + 150);  
 }
 
 function keyPressed (){ 
@@ -82,10 +82,7 @@ function landscape (){
 } 
 
 function draw() {
-  // space();
-  // moon();
-  clear();
-  //   
+  clear();   
   landscape ();
   examine ();
 }
@@ -125,13 +122,13 @@ function landing() {
     text ('YOU LOST!', 300, 200);   
     pop();  
   } 
-  if (fuel >= 0 && yship >= 415 &&
+  if (fuel > 0 && yship >= 415 &&
       ((xship > 0 && xship < 73) || 
       (xship > 130 && xship < 320) || 
       (xship > 395 && xship < 560))) {             
     yship = 415; 
     gravity = 0;
-    v = 0;   
+    v = 0;
     push();
     textAlign (CENTER);     
     textSize (60);
@@ -154,5 +151,5 @@ if (gameActive == 1) {
   landing(); 
   result ();
 }
-else { start(); }
+else {start();}
 }
