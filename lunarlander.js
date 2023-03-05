@@ -1,7 +1,8 @@
 let x = 300,
     y = 100,
     gravity = 10;
-let v = 9, //velocity
+    yship = 50;
+let v = 9, //velocity 
     fuel = 100,  
     gameActive = true;
      
@@ -15,7 +16,7 @@ function start(){
   textAlign(CENTER);
   push();
   textSize(60);
-  text("Lunar Lander", x, y + 50);
+  text("THE GAME", x, y + 50);
   pop();
   textSize(30);
   text( "Click SPACE to play", x, y + 150);
@@ -28,11 +29,11 @@ function keyPressed (){
 }
 
 function landscape (){
-  background(159, 189, 237);// rgb  0-255
+  background(159, 189, 237);
   
   // pretty sky
   for(var i=0; i<=400; i+=5){
-    strokeWeight(5*2);
+    strokeWeight(50);
     stroke(255*2-i*2,128*2-i*2,64*2);
     line(0,400-i*2,width,400-i*2); // x,y,x,y
   }
@@ -74,8 +75,8 @@ function landscape (){
 
  function ship() {
   // translate (x, y);
-  rect (x, y - 100, 40);
-  y = y+gravity;   
+  rect (x, yship , 40);
+  yship = yship + gravity;   
 } 
 
 function draw() {
@@ -89,7 +90,7 @@ function draw() {
 //ref: https://editor.p5js.org/skallywag/sketches/ByydCKx3m
 function landing() {
   if (keyIsDown(UP_ARROW)) {
-    y -= v; 
+    yship -= v;  
     fuel -= 2;
 //     p = 2;
 //     ship.rect.y -= v;
@@ -113,10 +114,27 @@ function landing() {
 }
 
  function result () {
-  if (fuel <= 0) {
-    // gravity = 0;
-    v = 0;
-    fuel = 0;}}  
+  if (fuel <= 0 && yship <= 415) {  
+    yship = 415;     
+    v = 0; 
+    fuel = 0;
+    push();
+    textAlign (CENTER);  
+    textSize (60);
+    fill (255, 255, 255);
+    text ('YOU LOST!', 300, 200);   
+    pop(); 
+  }
+  else if (fuel >= 0 && yship >= 415) { 
+    yship = 415;    
+    push();
+    textAlign (CENTER);  
+    textSize (60);
+    fill (255, 255, 255);
+    text ('YOU LOST!', 300, 200);   
+    pop();
+  }
+}   
     
 //     push();
 //     textSize (60);
