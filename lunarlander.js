@@ -1,14 +1,14 @@
 let x = 300,
     y = 100,
-    gravity = 1;
-let v = 10, //velocity
-    fuel = 100,
+    gravity = 10;
+let v = 9, //velocity
+    fuel = 100,  
     gameActive = true;
      
 
 function setup() {
   createCanvas (600, 500);
-}
+} 
 
 function start(){
   fill(255, 255, 255);
@@ -21,7 +21,7 @@ function start(){
   text( "Click SPACE to play", x, y + 150);
 }
 
-function keyPressed (){
+function keyPressed (){ 
   if (key == ' ') {
     gameActive = true;
   }
@@ -75,7 +75,7 @@ function landscape (){
  function ship() {
   // translate (x, y);
   rect (x, y - 100, 40);
-  y += gravity;   
+  y = y+gravity;   
 } 
 
 function draw() {
@@ -113,10 +113,10 @@ function landing() {
 }
 
  function result () {
-  if (fuel == 0) {
-    gravity = 0;
+  if (fuel <= 0) {
+    // gravity = 0;
     v = 0;
-    fuel = 0;}}
+    fuel = 0;}}  
     
 //     push();
 //     textSize (60);
@@ -130,14 +130,21 @@ function landing() {
 
 function engine (){
   textSize(24);
+  fill (255, 255, 255);
   text("fuel: " + fuel, 10, 30);
+  if (fuel > 0){
+
+  } 
 }
 
 function examine (){
+  keyPressed();
   ship();
   engine ();
-  landing();
-if (gameActive) {
-  y += gravity;
-}
+  landing(); 
+  result ();
+// if (gameActive) {
+//   y += gravity;
+// }
+// else start();
 }
