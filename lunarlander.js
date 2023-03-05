@@ -2,6 +2,7 @@ let x = 300,
     y = 100,
     gravity = 1;
 let v = 10, //velocity
+    fuel = 100,
     gameActive = true;
      
 
@@ -75,7 +76,7 @@ function landscape (){
   // translate (x, y);
   rect (x, y - 100, 40);
   y += gravity;   
-}
+} 
 
 function draw() {
   // space();
@@ -89,7 +90,7 @@ function draw() {
 function landing() {
   if (keyIsDown(UP_ARROW)) {
     y -= v; 
-//     fuel -= 2;
+    fuel -= 2;
 //     p = 2;
 //     ship.rect.y -= v;
   }
@@ -97,23 +98,25 @@ function landing() {
 //     p = 5;
 //   }
   if (keyIsDown(LEFT_ARROW)) {
-//     fuel -= 1;
+    x -= v; 
+    fuel -= 1;
 //     p = 2;
 //     ship.rect.x -= v;
 
   }
   if (keyIsDown(RIGHT_ARROW)) {
-//     fuel -= 1;
+    x += v;
+    fuel -= 1;
 //     p = 2;
 //     ship.rect.x += v;
   }
 }
 
-//  function result () {
-//   if (fuel == 0) {
-//     gravity = 0;
-//     v = 0;
-//     fuel = 0;
+ function result () {
+  if (fuel == 0) {
+    gravity = 0;
+    v = 0;
+    fuel = 0;}}
     
 //     push();
 //     textSize (60);
@@ -125,8 +128,14 @@ function landing() {
 //   return v;  
 // }
 
+function engine (){
+  textSize(24);
+  text("fuel: " + fuel, 10, 30);
+}
+
 function examine (){
   ship();
+  engine ();
   landing();
 if (gameActive) {
   y += gravity;
