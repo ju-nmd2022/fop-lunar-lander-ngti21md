@@ -6,7 +6,9 @@ let x = 300,
 let v = 9, //velocity
     // velx = 5, 
     fuel = 100,  
-    gameActive = 0;
+    gameActive = 0,
+    won = 0,
+    lost = 0;
      
 
 function setup() {
@@ -24,6 +26,22 @@ function start(){
   text( "Press SPACE to play", x, y + 150);  
 }
 
+function restart(){
+  if (won == 1 || lost == 1) {
+
+    push ();
+    fill (255, 255, 255);
+    textAlign (CENTER);
+    textSize (30);
+    text ('Press SPACE to restart');
+    pop ();
+
+    if (keyCode == ' ') {  
+      start ();
+    }
+  }
+}
+
 function keyPressed (){ 
   if (gameActive === 0) {
     keyCode = ' ';
@@ -38,7 +56,7 @@ function landscape (){
   for(var i=0; i<=400; i+=5){
     strokeWeight(50);
     stroke(255*2-i*2,128*2-i*2,64*2);
-    line(0,400-i*2,width,400-i*2); // x,y,x,y
+    line(0,400-i*2,width,400-i*2); 
   }
 
   // Green Ground
@@ -75,9 +93,8 @@ function landscape (){
   pop();
 } 
 
- function ship() {
-  // translate (x, y);
-  // rect (xship, yship , 40);
+function ship() {
+strokeWeight (5);
 push ();
 fill (255, 0, 0);
 triangle (xship, yship - 10, xship - 50, yship + 30, xship + 50, yship + 30);
@@ -99,6 +116,7 @@ function draw() {
   clear();   
   landscape ();
   examine ();
+  restart ();
 }
 
 //ref: https://editor.p5js.org/skallywag/sketches/ByydCKx3m
@@ -124,11 +142,12 @@ function landing() {
 }
 
  function result () {
-  if (fuel <= 0 && yship < 415 ) {   
+  if (fuel <= 0 && yship < 415 ) {    
     yship = 415; 
     gravity = 0;     
     v = 0; 
     fuel = 0;
+    lost = 1;
     push();
     textAlign (CENTER);   
     textSize (60);
@@ -143,6 +162,7 @@ function landing() {
     yship = 415; 
     gravity = 0;
     v = 0;
+    won = 1;
     push();
     textAlign (CENTER);     
     textSize (60);
@@ -164,6 +184,7 @@ if (gameActive == 1) {
   ship();
   landing(); 
   result ();
+  // restart ();
 }
 else {start();}
 }
