@@ -4,7 +4,7 @@ let x = 300,
     yship = 50;
     xship = 300;
 let v = 9, //velocity
-    velx = 5, 
+    // velx = 5, 
     fuel = 100,  
     gameActive = 0;
      
@@ -21,7 +21,7 @@ function start(){
   text("THE GAME", x, y + 50);
   pop();
   textSize(30); 
-  text( "Click SPACE to play", x, y + 150); 
+  text( "Press SPACE to play", x, y + 150); 
 }
 
 function keyPressed (){ 
@@ -94,8 +94,8 @@ function draw() {
 function landing() {
   if (keyIsDown(UP_ARROW)) {
     yship -= v;   
-    fuel -= 1; 
-    velx = 1;
+    fuel -= 3;  
+    // velx = 1;
   }
   else {
     velx = 5;
@@ -103,32 +103,32 @@ function landing() {
   if (keyIsDown(LEFT_ARROW)) {
     xship -= v; 
     fuel -= 1;
-    velx = 1;
+    // velx = 1;
   }
   if (keyIsDown(RIGHT_ARROW)) {
     xship += v;
     fuel -= 1;
-    velx = 1;
+    // velx = 1;
   }
 }
 
  function result () {
-  if (fuel <= 0 && velx > 1) {   
+  if (fuel <= 0 && yship < 415 ) {   
     yship = 415; 
     gravity = 0;     
     v = 0; 
     fuel = 0;
     push();
-    textAlign (CENTER);  
+    textAlign (CENTER);   
     textSize (60);
     fill (255, 255, 255);
     text ('YOU LOST!', 300, 200);   
     pop();  
-  }
-  if (fuel >= 0 && yship >= 415 && velx == 1 &&
-      xship > 0 && xship < 73 && 
-      xship > 130 && xship < 320 &&
-      xship > 395 && xship < 560) {        
+  } 
+  if (fuel >= 0 && yship >= 415 &&
+      ((xship > 0 && xship < 73) || 
+      (xship > 130 && xship < 320) || 
+      (xship > 395 && xship < 560))) {             
     yship = 415; 
     gravity = 0;
     v = 0;   
@@ -139,18 +139,16 @@ function landing() {
     text ('YOU WON!', 300, 200);     
     pop();  
   }
-
 }   
 
-function engine (){
+function engine (){ 
   textSize(24);
   fill (255, 255, 255);
   text("fuel: " + fuel, 10, 30);
 }
 
 function examine (){
-  
-if (gameActive) {
+if (gameActive == 1) {
   engine ();
   ship();
   landing(); 
