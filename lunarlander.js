@@ -3,7 +3,7 @@ let x = 300,
     gravity = 10;
     yship = 50;
     xship = 300;
-let v = 9, //velocity
+let v = 15, //velocity
     // velx = 5, 
     fuel = 100,  
     gameActive = 0,
@@ -108,10 +108,13 @@ function landing() {
 }
 
  function result () {
-  if (fuel <= 0 && yship < 415 && 
+  if (yship < 480) {
+    gravity += 0.0006; 
+   if (fuel <= 0 && yship < 415 && 
     ((xship > 73 && xship < 130) || 
     (xship > 320 && xship < 395) || 
     (xship > 560 && xship < 600))) {    
+    // landing ();
     yship = 415; 
     gravity = 0;     
     v = 0; 
@@ -123,15 +126,16 @@ function landing() {
     fill (255, 255, 255);
     text ('YOU LOST!', 300, 200);   
     pop();  
-  } 
-  if (fuel > 0 && yship >= 415 && yship < 500 &&
+   } 
+   if (fuel > 0 && yship >= 415 && yship < 500 &&
       ((xship > 0 && xship < 73) || 
       (xship > 130 && xship < 320) || 
-      (xship > 395 && xship < 560))) {             
+      (xship > 395 && xship < 560))) {
+    // landing ();             
     yship = 415; 
     gravity = 0;
     v = 0;
-    engine ('none');
+    // engine ('none');
     won = 1;
     push();
     textAlign (CENTER);     
@@ -139,7 +143,8 @@ function landing() {
     fill (255, 255, 255);
     text ('YOU WON!', 300, 200);     
     pop();  
-  }
+   }
+  } 
 }   
 
 function engine (){ 
