@@ -1,0 +1,8 @@
+html {
+    background-color: gray;
+   margin: 0;
+   display: flex;
+   margin-top: 8em;
+   align-items: center;
+   justify-content: center;  
+}
