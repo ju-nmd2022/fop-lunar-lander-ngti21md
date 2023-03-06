@@ -108,12 +108,11 @@ function landing() {
 }
 
  function result () {
-  if (yship < 480) {
-    gravity += 0.0016; 
-   if (fuel <= 0 && yship < 415 && 
-    ((xship > 73 && xship < 130) || 
-    (xship > 320 && xship < 395) || 
-    (xship > 560 && xship < 600))) {    
+  if (yship < 480) { 
+   if (fuel <= 0 && yship <= 415) {
+    // && ((xship > 73 && xship < 130) || 
+    //    (xship > 320 && xship < 395) || 
+    //    (xship > 560 && xship < 600))) {    
     // landing ();
     yship = 415; 
     gravity = 0;     
@@ -195,6 +194,7 @@ function keyPressedRestart (){
 function keyPressed (){ 
   if (gameActive === 0) {
     keyCode = ' ';
+    gravity += 0.020;
     gameActive = 1;  
   } 
 }
