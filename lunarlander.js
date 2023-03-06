@@ -108,26 +108,30 @@ function landing() {
 }
 
  function result () {
-  if (fuel <= 0 && yship < 415 ) {    
+  if (fuel <= 0 && yship < 415 && 
+    ((xship > 73 && xship < 130) || 
+    (xship > 320 && xship < 395) || 
+    (xship > 560 && xship < 600))) {    
     yship = 415; 
     gravity = 0;     
     v = 0; 
     fuel = 0;
     lost = 1;
-    push();
+    push(); 
     textAlign (CENTER);   
     textSize (60);
     fill (255, 255, 255);
     text ('YOU LOST!', 300, 200);   
     pop();  
   } 
-  if (fuel > 0 && yship >= 415 &&
+  if (fuel > 0 && yship >= 415 && yship < 500 &&
       ((xship > 0 && xship < 73) || 
       (xship > 130 && xship < 320) || 
       (xship > 395 && xship < 560))) {             
     yship = 415; 
     gravity = 0;
     v = 0;
+    engine ('none');
     won = 1;
     push();
     textAlign (CENTER);     
