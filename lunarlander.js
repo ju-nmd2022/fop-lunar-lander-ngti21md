@@ -109,7 +109,7 @@ function landing() {
 
  function result () {
   if (yship < 480) {
-    gravity += 0.0006; 
+    gravity += 0.0016; 
    if (fuel <= 0 && yship < 415 && 
     ((xship > 73 && xship < 130) || 
     (xship > 320 && xship < 395) || 
