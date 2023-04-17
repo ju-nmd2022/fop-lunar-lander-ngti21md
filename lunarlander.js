@@ -3,7 +3,7 @@ let x = 300,
     gravity = 10;
     yship = 50;
     xship = 300;
-let v = 15, //velocity
+let v, //velocity
     // velx = 5, 
     fuel = 100,  
     gameActive = 0,
@@ -19,7 +19,7 @@ function landscape (){
   background(159, 189, 237);
   
   // sky
-  for(var i=0; i<=400; i+=5){
+  for(let i=0; i<=400; i+=5){
     strokeWeight(50);
     stroke(255*2-i*2,128*2-i*2,64*2);
     line(0,400-i*2,width,400-i*2); 
@@ -70,12 +70,12 @@ push ();
 fill (126, 126, 126);
 ellipse (xship, yship, 60, 70);
 pop ();
+   
 
 push ();
 fill (255, 255, 255);
 ellipse (xship, yship - 10 , 30);
-pop ();
-yship = yship + gravity;   
+pop ();   
 } 
 
 function draw() {
@@ -87,27 +87,28 @@ function draw() {
 
 //ref: https://editor.p5js.org/skallywag/sketches/ByydCKx3m
 function landing() {
+  yship = yship + gravity*0.6;
+  v = 10; //velocity
+  gravity += 0.6; 
   if (keyIsDown(UP_ARROW)) {
+    v -= 0.5;
     yship -= v;   
     fuel -= 3;  
     // velx = 1;
-  }
-  else {
-    velx = 5;
   }
   if (keyIsDown(LEFT_ARROW)) {
     xship -= v; 
     fuel -= 1;
     // velx = 1;
   }
-  if (keyIsDown(RIGHT_ARROW)) {
+  if (keyIsDown(RIGHT_ARROW)) {   
     xship += v;
     fuel -= 1;
     // velx = 1;
   }
 }
 
- function result () {
+ function result () {  
   if (yship < 480) { 
    if (fuel <= 0 && yship <= 415) {
     // && ((xship > 73 && xship < 130) || 
@@ -134,7 +135,6 @@ function landing() {
     yship = 415; 
     gravity = 0;
     v = 0;
-    // engine ('none');
     won = 1;
     push();
     textAlign (CENTER);     
@@ -181,7 +181,7 @@ function keyPressedRestart (){
     gravity = 10;
     yship = 50;
     xship = 300;
-    v = 9; //velocity
+    v = 10; //velocity
     // velx = 5, 
     fuel = 100;  
     gameActive = 0;
