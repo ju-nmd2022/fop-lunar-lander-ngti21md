@@ -1,9 +1,9 @@
 let x = 300,
     y = 100,
-    gravity = 10;
+    gravity;
     yship = 50;
     xship = 300;
-let v, //velocity
+let v = 10, //velocity
     // velx = 5, 
     fuel = 100,  
     gameActive = 0,
@@ -87,25 +87,26 @@ function draw() {
 
 //ref: https://editor.p5js.org/skallywag/sketches/ByydCKx3m
 function landing() {
-  yship = yship + gravity*0.6;
-  v = 10; //velocity
-  gravity += 0.6; 
+  yship = yship + v;
+  v += 0.3; 
   if (keyIsDown(UP_ARROW)) {
-    v -= 0.5;
-    yship -= v;   
-    fuel -= 3;  
-    // velx = 1;
+    v -= 0.9;
+    // yship -= v;   
+    fuel -= 1;  
+  } else {
+    v += 0.1;
   }
   if (keyIsDown(LEFT_ARROW)) {
     xship -= v; 
     fuel -= 1;
-    // velx = 1;
   }
   if (keyIsDown(RIGHT_ARROW)) {   
     xship += v;
     fuel -= 1;
-    // velx = 1;
   }
+
+// yship += v;
+// v += 0.2;   
 }
 
  function result () {  
